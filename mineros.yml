@@ -1,0 +1,5 @@
+---
+- name: Mineros playbook
+  hosts: mineros
+  roles:
+    - role: cpuminer-multi

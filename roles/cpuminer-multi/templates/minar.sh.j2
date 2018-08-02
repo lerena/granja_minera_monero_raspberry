@@ -1,0 +1,11 @@
+#!/bin/sh
+echo cuenta \(nombre@dominio.com\)?:
+read usuario
+echo contrasena?:
+read contrasena
+echo cuantos cores utilizar?:
+read cores
+echo se va a comenzar a minar con la cuenta $usuario.
+echo dentro de 5 segundos
+sleep 5s
+cpuminer-multi/minerd -a cryptonight -o stratum+tcp://xmr.pool.minergate.com:45700 -u $usuario -p $contrasena -t $cores

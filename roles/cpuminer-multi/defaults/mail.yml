@@ -1,0 +1,6 @@
+---
+usuario: email@email.com #[cuenta de correo en www.minergate.com]
+contrasena: password #[contraseña de cuenta www.minergate.com]
+cores: 4 #[numero de cores CPU a utilizar en la mineria]
+
+home_minergate: /home/pi/minergate

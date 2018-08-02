@@ -1,0 +1,77 @@
+---
+- name: apt update
+  apt:
+    name: "*"
+    state: latest
+
+- name: apt upgrade
+  apt:
+    upgrade: dist
+
+- name: instalar dependencias "autoconf"
+  apt:
+    name: autoconf
+
+- name: instalar dependencias "libcurl4-openssl-dev"
+  apt:
+    name: libcurl4-openssl-dev
+
+- name: instalar dependencias "libjansson-dev"
+  apt:
+    name: libjansson-dev
+
+- name: instalar dependencias "openssl"
+  apt:
+    name: openssl
+
+- name: instalar dependencias "libssl-dev"
+  apt:
+    name: libssl-dev
+
+- name: instalar dependencias "gcc"
+  apt:
+    name: gcc
+
+- name: instalar dependencias "gawk"
+  apt:
+    name: gawk
+
+- name: instalar dependencias "git"
+  apt:
+    name: git
+
+- name: clonar repositorio "lucasjones/cpuminer-milti" de Github
+  git:
+    repo: https://github.com/lucasjones/cpuminer-multi.git
+    dest: {{home_minergate}}/cpuminer-multi
+
+- name: autogenerar proyecto C minero
+  command: {{home_minergate}}/cpuminer-multi/autogen.sh
+  args:
+    chdir: {{home_minergate}}/cpuminer-multi/
+    warn: no
+
+- name: configurar proyecto C minero
+  command: {{home_minergate}}/cpuminer-multi/configure
+  args:
+    chdir: {{home_minergate}}/cpuminer-multi/
+    warn: no
+
+- name: compilar proyecto C minero
+  command: make
+  args:
+    chdir: {{home_minergate}}/cpuminer-multi/
+    warn: no
+
+- name: copiar script minar.sh
+  template:
+    src: minar.sh.j2
+    dest: {{home_minergate}}/minar.sh
+    owner: pi
+    group: pi
+    mode: 0744
+
+- name: comenzar a minar
+  expect:
+    command: {{home_minergate}}/cpuminer-multi/minerd -a cryptonight -o stratum+tcp://xmr.pool.minergate.com:45700 -u {{usuario}} -p {{contrasena}} -t {{cores}}
+    echo: yes
