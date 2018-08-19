@@ -1,5 +1,5 @@
 # EN CONSTRUCCION
-# VERSIO ALFA 1
+# VERSIO beta 1
 
 # granja_minera_monero_raspberry
 Proyecto experimental y educativo para el despliege automatizado de nodos servidores con Ansible. tomando como ejemplo, el despliege de nodos mineros en placas Raspberry 2 y 3.

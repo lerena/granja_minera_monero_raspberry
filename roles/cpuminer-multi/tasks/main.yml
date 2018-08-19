@@ -40,38 +40,46 @@
   apt:
     name: git
 
+- name: crear home minergate
+  file:
+    path: "{{ home_minergate }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0775
+
 - name: clonar repositorio "lucasjones/cpuminer-milti" de Github
   git:
     repo: https://github.com/lucasjones/cpuminer-multi.git
-    dest: {{home_minergate}}/cpuminer-multi
+    dest: "{{ home_minergate }}/cpuminer-multi"
 
 - name: autogenerar proyecto C minero
-  command: {{home_minergate}}/cpuminer-multi/autogen.sh
+  command: "{{ home_minergate }}/cpuminer-multi/autogen.sh"
   args:
-    chdir: {{home_minergate}}/cpuminer-multi/
+    chdir: "{{ home_minergate }}/cpuminer-multi/"
     warn: no
 
 - name: configurar proyecto C minero
-  command: {{home_minergate}}/cpuminer-multi/configure
+  command: "{{ home_minergate }}/cpuminer-multi/configure"
   args:
-    chdir: {{home_minergate}}/cpuminer-multi/
+    chdir: "{{ home_minergate }}/cpuminer-multi/"
     warn: no
 
 - name: compilar proyecto C minero
   command: make
   args:
-    chdir: {{home_minergate}}/cpuminer-multi/
+    chdir: "{{ home_minergate }}/cpuminer-multi/"
     warn: no
 
 - name: copiar script minar.sh
   template:
     src: minar.sh.j2
-    dest: {{home_minergate}}/minar.sh
+    dest: "{{ home_minergate }}/minar.sh"
     owner: pi
     group: pi
     mode: 0744
 
 - name: comenzar a minar
-  expect:
-    command: {{home_minergate}}/cpuminer-multi/minerd -a cryptonight -o stratum+tcp://xmr.pool.minergate.com:45700 -u {{usuario}} -p {{contrasena}} -t {{cores}}
-    echo: yes
+  command: "{{ home_minergate }}/cpuminer-multi/minerd -a cryptonight -o stratum+tcp://xmr.pool.minergate.com:45700 -u {{ usuario }} -p {{ contrasena }} -t {{ cores }}"
+  args:
+    warn: no

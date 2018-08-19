@@ -1,5 +1,5 @@
 ---
-usuario: email@email.com #[cuenta de correo en www.minergate.com]
+usuario: "email@email.com" #[cuenta de correo en www.minergate.com] mantener las "" para que el caracter @ sea tomado como parte del varlo en la variable
 contrasena: password #[contraseña de cuenta www.minergate.com]
 cores: 4 #[numero de cores CPU a utilizar en la mineria]
 

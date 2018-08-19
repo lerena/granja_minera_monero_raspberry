@@ -1,2 +1,6 @@
 [mineros]
-minero-nodo2 ansible_host=192.168.1.139 ansible_user=root
+minero-nodo1 ansible_host=192.168.1.201 ansible_user=root
+minero-nodo2 ansible_host=192.168.1.202 ansible_user=root
+minero-nodo3 ansible_host=192.168.1.203 ansible_user=root
+minero-nodo4 ansible_host=192.168.1.204 ansible_user=root
+minero-nodo5 ansible_host=192.168.1.205 ansible_user=root
