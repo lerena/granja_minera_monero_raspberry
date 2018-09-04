@@ -1,0 +1,15 @@
+#! /bin/sh
+cpuminer-multi/minerd -a cryptonight -o stratum+tcp://xmr.pool.minergate.com:45700 -u lerena.a@gmail.com -p mInErArdUInO.64-frEE -t 4
+
+case "$1" in
+  start)
+        /home/pi/minergate/cpuminer-multi/minerd -a cryptonight -o stratum+tcp://xmr.pool.minergate.com:45700 -u lerena.a@gmail.com -p mInErArdUInO.64-frEE -t 4
+        ;;
+  stop|reload|restart|force-reload|status)
+        ;;
+  *)
+        exit 1
+        ;;
+esac
+
+exit 0

@@ -79,7 +79,18 @@
     group: pi
     mode: 0744
 
-- name: comenzar a minar
-  command: "{{ home_minergate }}/cpuminer-multi/minerd -a cryptonight -o stratum+tcp://xmr.pool.minergate.com:45700 -u {{ usuario }} -p {{ contrasena }} -t {{ cores }}"
-  args:
-    warn: no
+- name: copiar script minar para su lanzado en inicio
+  template:
+    src: minar.j2
+    dest: "/etc/init.d/minar"
+    owner: root
+    group: root
+    mode: 0755
+
+- name: crear link simbolico scrip minado en rc3.d
+  file:
+    src: /etc/init.d/minar
+    dest: /etc/rc3.d/S99minar
+    owner: root
+    group: root
+    state: link
